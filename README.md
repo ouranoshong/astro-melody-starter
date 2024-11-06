@@ -1,5 +1,7 @@
 # Astro Starter Kit: Blog
 
+![ScreenShots](./screenshots.png)
+
 Features:
 
 - ✅ DasiyUI + Tailwind CSS + Astro
