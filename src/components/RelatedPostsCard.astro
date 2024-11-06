@@ -1,0 +1,50 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import OptimizedCover from "@components/OptimizedPicture.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+
+const { currentCategory, currentSlug } = Astro.props;
+
+async function getRelatedArticlesByCategory(): Promise<
+  CollectionEntry<"posts">[]
+> {
+  const allPosts = await getCollection("posts");
+  return allPosts
+    .filter(
+      (post) =>
+        post.data.category.includes(currentCategory) &&
+        post.slug !== currentSlug,
+    )
+    .sort(
+      (a, b) =>
+        new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf(),
+    )
+    .slice(0, 3);
+}
+
+const relatedPosts = await getRelatedArticlesByCategory();
+---
+
+<div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+  {
+    relatedPosts.map((post) => (
+      <div class="card mb-4 overflow-hidden rounded-xl border  transition-transform duration-500 hover:-translate-y-1 hover:scale-105">
+        <a href={`/posts/${post.slug}/`}>
+          <OptimizedCover src={post.data.cover} alt={post.data.coverAlt} />
+          <div class="card-body">
+            <div class="flex items-center gap-1 text-xs">
+              {
+                post.data.tags.map((tag) => (
+                  <span class="badge badge-outline">{tag}</span>
+                ))
+              }
+            </div>
+            <p class="text-xs"><FormattedDate date={post.data.pubDate} /></p>
+            <h2 class="card-title">{post.data.title}</h2>
+          </div>
+        </a>
+      </div>
+    ))
+  }
+</div>

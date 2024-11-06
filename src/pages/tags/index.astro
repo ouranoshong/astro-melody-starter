@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { Tags_TITLE, Tags_DESCRIPTION } from "@consts";
+
+const allPosts = await getCollection("posts");
+
+let tagCounts: { [key: string]: number } = {};
+allPosts.forEach((post) => {
+  (post.data.tags || []).forEach((tag) => {
+    if (tag in tagCounts) {
+      tagCounts[tag] += 1;
+    } else {
+      tagCounts[tag] = 1;
+    }
+  });
+});
+
+const tags = Object.keys(tagCounts);
+---
+
+<BaseLayout title={Tags_TITLE} description={Tags_DESCRIPTION}>
+  <div class="prose prose-lg mx-auto p-6">
+    <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+      {
+        tags.map((tag) => (
+          <a
+            href={`/tags/${tag}/1/`}
+            class="rounded-full bg-neutral-200 px-3 py-2 text-center text-sm font-semibold no-underline hover:bg-neutral-300"
+          >
+            {tag} <span>({tagCounts[tag]})</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

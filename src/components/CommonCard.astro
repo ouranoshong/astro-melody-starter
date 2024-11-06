@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from "astro:content";
+import OptimizedCover from "@components/OptimizedPicture.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+
+interface Props {
+  post: CollectionEntry<"posts">;
+}
+
+const { post } = Astro.props;
+---
+
+<div
+  class="card shadow-xl rounded-xl overflow-hidden border transition-transform duration-500 hover:-translate-y-1 hover:scale-105"
+>
+  <a href={`/posts/${post.slug}/`}>
+    <figure>
+      <OptimizedCover src={post.data.cover} alt={post.data.coverAlt} />
+    </figure>
+    <div class="card-body">
+      <div class="flex items-center gap-1 text-xs">
+        {
+          post.data.tags?.map(tag => <span class="badge badge-outline">{tag}</span>)
+        } 
+      </div>
+      <p class="text-xs"><FormattedDate date={post.data.pubDate} /></p>
+      <h3 class="card-title">{post.data.title}</h3>
+    </div>
+  </a>
+</div>

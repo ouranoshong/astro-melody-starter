@@ -1,0 +1,49 @@
+---
+import Link from "@components/Links.astro";
+import { BRAND_NAME, FooterLinks, SocialLinks } from "@consts";
+const today = new Date();
+---
+
+<footer class="mx-auto mt-auto w-full max-w-[85rem] py-10">
+  <nav class="mx-auto w-full max-w-[85rem] px-4" aria-label="Footer">
+    <div class="flex flex-col items-center sm:flex-row sm:justify-between">
+      <div id="navbar-alignment" class="internal-links sm:order-2">
+        <div
+          class="mt-2 flex flex-row gap-5 sm:mt-0 sm:flex-row sm:items-center sm:ps-5"
+        >
+          {
+            FooterLinks.map((link) => (
+              <Link href={link.href} class="inline-flex gap-x-2 text-sm">
+                {link.title}
+              </Link>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="mt-2 flex flex-wrap gap-2 sm:order-3 sm:mb-0 sm:gap-0">
+        {
+          SocialLinks.map((link) => (
+            <button
+              type="button"
+              class="relative inline-flex h-12 w-12 items-center gap-x-2 px-4 py-3 disabled:pointer-events-none disabled:opacity-50"
+            >
+              <a
+                href={link.href}
+                class="absolute inset-0 z-10"
+                aria-label={link.label}
+              />
+              <i class={link.icon + " icon-base"} />
+            </button>
+          ))
+        }
+      </div>
+
+      <div class="mt-2 sm:order-1 sm:mb-0">
+        <a class="flex-none text-sm" href="/" aria-label="Brand"
+          >{BRAND_NAME} &copy; {today.getFullYear()}</a
+        >
+      </div>
+    </div>
+  </nav>
+</footer>
