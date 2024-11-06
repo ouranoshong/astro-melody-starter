@@ -35,6 +35,10 @@ The `src/content/` directory contains "collections" of related Markdown and MDX 
 
 Any static assets, like images, can be placed in the `public/` directory.
 
+#### Configuration
+
+Try to update configuration in `src/consts.ts` files.
+
 ## Commands
 
 All commands are run from the root of the project, from a terminal:
