@@ -13,7 +13,7 @@ const { post } = Astro.props;
 <div
   class="card shadow-xl rounded-xl overflow-hidden border transition-transform duration-500 hover:-translate-y-1 hover:scale-105"
 >
-  <a href={`/posts/${post.slug}/`}>
+  <a href={`/posts/${post.id}/`}>
     <figure>
       <OptimizedCover src={post.data.cover} alt={post.data.coverAlt} />
     </figure>

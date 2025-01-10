@@ -31,16 +31,14 @@ const truncatedDescription = truncateUTF8String(post.data.description, 150);
 ---
 
 <div
-  class="card lg:card-side bg-base-100 shadow-xl overflow-hidden rounded-xl border transition-transform duration-500 hover:-translate-y-1 hover:scale-105"
+  class="card overflow-hidden rounded-xl border bg-base-100 shadow-xl transition-transform duration-500 lg:card-side hover:-translate-y-1 hover:scale-105"
 >
-  <a href={`/posts/${post.slug}/`} class="block md:flex md:flex-1">
+  <a href={`/posts/${post.id}/`} class="block md:flex md:flex-1">
     <div class="md:w-2/3">
       <OptimizedCover src={post.data.cover} alt={post.data.coverAlt} />
     </div>
-    <div
-      class="card-body"
-    >
-    <div class="mt-8 flex items-center gap-2 text-xs">
+    <div class="card-body">
+      <div class="mt-8 flex items-center gap-2 text-xs">
         {
           post.data.tags.map((tag) => (
             <span class="badge badge-outline">{tag}</span>

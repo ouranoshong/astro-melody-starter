@@ -19,14 +19,14 @@ export default defineConfig({
 	},
 
 	experimental: {
-		contentCollectionCache: true,
+		
 	},
 
 	image: {
 		remotePatterns: [
 			{
 				protocol: "https",
-				hostname: "**.unsplash.com",
+				hostname: "images.unsplash.com",
 			},
 		],
 	},

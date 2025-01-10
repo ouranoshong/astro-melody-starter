@@ -14,7 +14,7 @@ async function getRelatedArticlesByCategory(): Promise<
     .filter(
       (post) =>
         post.data.category.includes(currentCategory) &&
-        post.slug !== currentSlug,
+        post.id !== currentSlug,
     )
     .sort(
       (a, b) =>
@@ -30,7 +30,7 @@ const relatedPosts = await getRelatedArticlesByCategory();
   {
     relatedPosts.map((post) => (
       <div class="card mb-4 overflow-hidden rounded-xl border  transition-transform duration-500 hover:-translate-y-1 hover:scale-105">
-        <a href={`/posts/${post.slug}/`}>
+        <a href={`/posts/${post.id}/`}>
           <OptimizedCover src={post.data.cover} alt={post.data.coverAlt} />
           <div class="card-body">
             <div class="flex items-center gap-1 text-xs">
