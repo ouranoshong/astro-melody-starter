@@ -1,50 +1,50 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
-import mdx from '@astrojs/mdx';
+import { defineConfig } from "astro/config";
+import mdx from "@astrojs/mdx";
 
-import sitemap from '@astrojs/sitemap';
+import sitemap from "@astrojs/sitemap";
 import { remarkModifiedTime } from "./src/utils/remark-modified-time.mjs";
 import partytown from "@astrojs/partytown";
 import pagefind from "astro-pagefind";
-import tailwind from "@astrojs/tailwind";
-
+import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
-	trailingSlash: "always",
-	prefetch: {
-		prefetchAll: true,
-		defaultStrategy: 'viewport',
-	},
+  vite: {
+    plugins: [tailwindcss()],
+  },
+  site: "https://example.com",
+  trailingSlash: "always",
 
-	experimental: {
-		
-	},
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: "viewport",
+  },
 
-	image: {
-		remotePatterns: [
-			{
-				protocol: "https",
-				hostname: "images.unsplash.com",
-			},
-		],
-	},
+  experimental: {},
 
-	markdown: {
-		remarkPlugins: [remarkModifiedTime],
-	},
-	integrations: [
-		mdx(),
-		sitemap(),
-		pagefind(),
-		tailwind(),
+  image: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+    ],
+  },
 
-		partytown({
-			config: {
-				forward: ["dataLayer.push"],
-				debug: false,
-			},
-		}),
-	],
+  markdown: {
+    remarkPlugins: [remarkModifiedTime],
+  },
+  integrations: [
+    mdx(),
+    sitemap(),
+    pagefind(),
+
+    partytown({
+      config: {
+        forward: ["dataLayer.push"],
+        debug: false,
+      },
+    }),
+  ],
 });

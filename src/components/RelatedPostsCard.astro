@@ -29,7 +29,7 @@ const relatedPosts = await getRelatedArticlesByCategory();
 <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
   {
     relatedPosts.map((post) => (
-      <div class="card mb-4 overflow-hidden rounded-xl border  transition-transform duration-500 hover:-translate-y-1 hover:scale-105">
+      <div class="card mb-4 overflow-hidden rounded-xl border-gray-200  transition-transform duration-500 hover:-translate-y-1 hover:scale-105">
         <a href={`/posts/${post.id}/`}>
           <OptimizedCover src={post.data.cover} alt={post.data.coverAlt} />
           <div class="card-body">

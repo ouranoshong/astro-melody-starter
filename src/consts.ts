@@ -45,15 +45,15 @@ export const FooterLinks = [
 
 // Social Links, src/components/Footer.astro
 export const SocialLinks = [
-  { href: "/rss.xml", icon: "i-tabler-rss", label: "RSS" },
+  { href: "/rss.xml", icon: "icon-[tabler--rss]", label: "RSS" },
   {
     href: "https://twitter.com/astrodotbuild",
-    icon: "i-tabler-brand-twitter",
+    icon: "icon-[tabler--brand-twitter]",
     label: "Twitter",
   },
   {
-    href: "https://github.com/isooosi",
-    icon: "i-tabler-brand-github",
+    href: "https://github.com/ouranoshong/astro-melody-starter",
+    icon: "icon-[tabler--brand-github]",
     label: "GitHub",
   },
 ];

@@ -1,6 +1,6 @@
 ---
 import Link from "@components/Links.astro";
-import { SITE_TITLE, HeaderLinks, DARK_THEME, LIGHT_THEME} from "@consts";
+import { SITE_TITLE, HeaderLinks, DARK_THEME, LIGHT_THEME } from "@consts";
 ---
 
 <header class="z-50 flex w-full flex-wrap py-7 md:flex-nowrap md:justify-start">
@@ -24,7 +24,7 @@ import { SITE_TITLE, HeaderLinks, DARK_THEME, LIGHT_THEME} from "@consts";
         href="/search/"
         href="/search/"
       >
-        <i class="icon-base i-tabler-search"></i>
+        <i class="icon-base icon-[tabler--search]"></i>
       </a>
 
       <div class="dropdown dropdown-end">
@@ -33,11 +33,11 @@ import { SITE_TITLE, HeaderLinks, DARK_THEME, LIGHT_THEME} from "@consts";
           role="button"
           class="flex size-[38px] items-center justify-center rounded-xl text-sm font-semibold"
         >
-          <i class="icon-base i-tabler-category-2"></i>
+          <i class="icon-base icon-[tabler--category-2]"></i>
         </div>
         <ul
           tabindex="0"
-          class="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow"
+          class="menu dropdown-content rounded-box bg-base-100 z-[1] w-52 p-2 shadow"
         >
           {
             HeaderLinks.map((link) => (
@@ -53,11 +53,16 @@ import { SITE_TITLE, HeaderLinks, DARK_THEME, LIGHT_THEME} from "@consts";
 
       <label class="swap swap-rotate rounded-xl px-3 py-2 text-sm">
         <!-- this hidden checkbox controls the state -->
-        <input type="checkbox" class="theme-controller" data-unchecked-value={LIGHT_THEME} value={DARK_THEME} />
+        <input
+          type="checkbox"
+          class="theme-controller"
+          data-unchecked-value={LIGHT_THEME}
+          value={DARK_THEME}
+        />
         <!-- sun icon -->
-        <i class="icon-base swap-off i-tabler-sun-filled"></i>
+        <i class="icon-base swap-off icon-[tabler--sun-filled]"></i>
         <!-- moon icon -->
-        <i class="icon-base swap-on i-tabler-moon-filled"></i>
+        <i class="icon-base swap-on icon-[tabler--moon-filled]"></i>
       </label>
     </div>
   </nav>
@@ -65,25 +70,27 @@ import { SITE_TITLE, HeaderLinks, DARK_THEME, LIGHT_THEME} from "@consts";
 
 <!-- Save theme to localStorage -->
 <script is:inline>
-  const lightTheme =  document.querySelector('.theme-controller')?.getAttribute('data-unchecked-value');
+  const themeController = document.querySelector(".theme-controller");
+  const lightTheme = document
+    .querySelector(".theme-controller")
+    .getAttribute("data-unchecked-value");
   // ☝️ This script prevent the FART effect.
   if (localStorage.getItem("theme") === null) {
     document.documentElement.setAttribute("data-theme", lightTheme);
-  } else
-    document.documentElement.setAttribute(
-      "data-theme",
-      localStorage.getItem("theme"),
-    );
+  } else {
+    const dt = localStorage.getItem("theme");
+
+    if (lightTheme !== dt) {
+      themeController.checked = true;
+    }
+  }
+
+  themeController.addEventListener("change", () => {
+    const t = themeController.checked
+      ? themeController.value
+      : themeController.getAttribute("data-unchecked-value");
+    localStorage.setItem("theme", t);
+  });
   // "theme" LocalStorage value is set by the package to remember user preference.
   // The value is checked and applyed before rendering anything.
-</script>
-<script>
-  const themeController: HTMLInputElement | null =
-    document.querySelector(".theme-controller");
-
-  themeController?.addEventListener("change", () => {
-    const t = themeController?.checked ? themeController?.value : themeController?.getAttribute('data-unchecked-value');
-    localStorage.setItem("theme", t ?? '');
-  });
-  // 👆 you could import the CDN directly instead of these two lines
 </script>
