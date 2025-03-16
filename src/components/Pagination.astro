@@ -44,7 +44,7 @@ const computedBasePath = basePath ? ensureTrailingSlash(basePath) : "/page/";
         aria-label="Previous page"
         class="inline-flex min-h-[38px] min-w-[38px] items-center justify-center gap-x-1.5 rounded-lg px-2.5 py-2 text-sm"
       >
-        <i class="icon-[tabler--chevron-left] icon-base"></i>
+        <i class="i-tabler-chevron-left icon-base"></i>
       </a>
     ) : (
       ""
@@ -55,7 +55,7 @@ const computedBasePath = basePath ? ensureTrailingSlash(basePath) : "/page/";
       Array.from({ length: endPage - startPage + 1 }, (_, i) => {
         const pageNumber = startPage + i;
         const isActive = currentPage === pageNumber;
-        const pageClass = `min-h-[38px] min-w-[38px] flex justify-center items-center py-2 px-3 text-sm rounded-lg ${isActive ? "btn-active" : ""}`;
+        const pageClass = `min-h-[38px] min-w-[38px] flex justify-center items-center py-2 px-3 text-sm rounded-lg ${isActive ? "bg-base-300" : ""}`;
         return (
           <li>
             <a
